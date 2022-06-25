@@ -143,6 +143,46 @@ btnupdate.addEventListener('click', (e) => {
     }
 })
 
+let btnsearch = document.getElementById('btnsearch')
+btnsearch.addEventListener('click', (e) => {
+    let display = document.getElementById('display')
+    display.innerHTML ='NO search result to display'
+    let id = document.getElementById('search').value
+    let error = false
+    let mgs = ''
+    if(id==''){
+    msg = 'enter flight ID to search\n'
+    error = true
+    }
+   
+    if(!error){
+        $.ajax({
+            type: "POST",
+            url: "/searchflight",
+            data: { 
+                'id': id
+            },
+            success: function(data) {
+                if(data.success){
+                    display.innerHTML = "<p class='text-info'>" +
+                    "Title : " + data.flight.title + "<br>" +
+                     "Price: " + data.flight.price + "<br>" +
+                     "Time : " + data.flight.time + "<br>" +
+                     "Date : " + data.flight.date +
+                    "</p>"
+                }else{
+                    alert(data.msg)
+                }
+            },
+            error: function(jqXHR, textStatus, err) {
+                alert('text status '+textStatus+', err '+err)
+            }
+        });
+    }else{
+        alert(msg)
+    }
+})
+
 const fillTable = (data) => {
     let table = document.getElementById('table')
     for(let i=table.children.length-1;i>=0;i--){

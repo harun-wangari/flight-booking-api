@@ -35,8 +35,8 @@
                 
             </tbody>
         </table>
-       <div class="container">
-           <form action="" class="form">
+       <div class="container row" style="background-color: whitesmokke;">
+           <form action="" class="form col-sm-8">
                <p id="id" hidden></p>
             <label for="title">Title</label><br>
             <input type="text" name="title" id="title" class="form-control">
@@ -48,6 +48,18 @@
             <input type="date" name="date" id="date" class="form-control"><br>
             <button type="button" class="btn btn-success" id="btnaddflight">Book Flight</button>
             <button type="button" class="btn btn-info" id="btnupdateflight">Update Flight</button>
+           </form>
+
+           <form action="" class="form col-sm-4 row">
+               <h4 class="h4 text-success text-center">Search Flight</h4>
+               <div class="col-sm-8" >
+                <label for="search">Enter flight ID</label><br>   
+               <input type="search" name="search" id="search" class="form-control">
+            </div>
+               <div class="col-sm-4"> <br><button class="btn btn-success" id="btnsearch" type="button">Search</button></div>
+               <div id="display">
+                    No search results to display
+               </div>
            </form>
        </div>
     </div>

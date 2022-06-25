@@ -44,7 +44,7 @@ app.post("/bookflight", (req,res) => {
 
 app.post("/updateflight", (req,res) => {
   let id = Number(req.body.id)  
-  flight = flights.find((item,index) => item.id == id)
+  flight = flights.find((item) => item.id == id)
   if(flight!=undefined){
     let flightindex = flights.indexOf(flight)
     flight = {
@@ -70,7 +70,7 @@ app.post("/updateflight", (req,res) => {
 
 app.post("/deleteflight", (req,res) => {
   let id = Number(req.body.id)  
-  flight = flights.find((item,index) => item.id == id)
+  flight = flights.find((item) => item.id == id)
   let flightindex = flights.indexOf(flight)
   flights.splice(flightindex,1) 
   let data = JSON.stringify(flights)
@@ -80,6 +80,20 @@ app.post("/deleteflight", (req,res) => {
     }
   })
   return res.json({success:1,flights:flights,msg:'flight has been Deleted'})
+});
+
+app.post("/searchflight", (req,res) => {
+  let id = Number(req.body.id)  
+  flight = flights.find((item) => item.id == id)
+  if(flight!=undefined){
+    let flightindex = flights.indexOf(flight)
+    flight = flights[flightindex]
+    let data = JSON.stringify(flight)
+    return res.json({success:1,flight:flight})
+  }else{
+    return res.json({success:0,msg:`flight with ${id} does not exit`})
+  }
+
 });
 
 const port = process.env.PORT || 8000;
