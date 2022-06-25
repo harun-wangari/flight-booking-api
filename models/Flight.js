@@ -1,0 +1,1 @@
+nexports.exampleModel = [];

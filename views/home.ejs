@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Booking</title>
+    <link rel="stylesheet" href="/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h3 class="h2 text-success text-center">Flight Booking</h3>
+        <table class="table table-striped">
+            <thead>
+                <th>Title</th>
+                <th>Price</th>
+                <th>Time</th>
+                <th>Date</th>
+                <th>Action</th>
+            </thead>
+            <tbody id="table">
+                <%for(flight of flights){%>
+                    <tr>
+                        <td hidden><%=flight.id%></td>
+                        <td><%=flight.title%></td>
+                        <td><%=flight.price%></td>
+                        <td><%=flight.time%></td>
+                        <td><%=flight.date%></td>
+                        <td>
+                            <button type="button" class="btn btn-info">Edit</button>
+                            <button type="button" class="btn btn-danger">Delete</button>
+                        </td>
+                    </tr>
+                <%}%>
+                
+            </tbody>
+        </table>
+       <div class="container">
+           <form action="" class="form">
+               <p id="id" hidden></p>
+            <label for="title">Title</label><br>
+            <input type="text" name="title" id="title" class="form-control">
+            <label for="time">Time</label><br>
+            <input type="time" name="time" id="time" class="form-control">
+            <label for="price">Price</label><br>
+            <input type="text" name="price" id="price" class="form-control">
+            <label for="date">Date</label><br>
+            <input type="date" name="date" id="date" class="form-control"><br>
+            <button type="button" class="btn btn-success" id="btnaddflight">Book Flight</button>
+            <button type="button" class="btn btn-info" id="btnupdateflight">Update Flight</button>
+           </form>
+       </div>
+    </div>
+    <script src="/jquery.min.js"></script>
+    <script src="/bootstrap.bundle.min.js"></script>
+    <script src="/client.js"></script>
+</body>
+</html>
