@@ -44,12 +44,16 @@ app.post("/bookflight", (req,res) => {
 
 app.post("/updateflight", (req,res) => {
   let id = Number(req.body.id)
-  flights[id] = {
+  console.log(req.body)
+  flights[id-1] = {
+    "id" : id,
     "title": req.body.title,
-        "time": req.body.time,
-        "price": req.body.price,
-        "date": req.body.date
-  }
+    "time": req.body.time,
+    "price": req.body.price,
+    "date": req.body.date
+}
+  console.log('----------------------------------------------------------')
+  console.log(flights)
   let data = JSON.stringify(flights)
   reader.writeFile('flight.json',data,(err) => {
     if(err){

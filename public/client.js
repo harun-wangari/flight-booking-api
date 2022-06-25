@@ -56,7 +56,7 @@ btnadd.addEventListener('click', (e) => {
 let table =document.getElementById('table')
 table.addEventListener('click', (e) => {
     if(e.target.classList.contains('btn-info')){
-        document.getElementById('id').value = e.target.parentNode.parentNode.children[0].innerHTML
+        document.getElementById('id').innerHTML = e.target.parentNode.parentNode.children[0].innerHTML
         document.getElementById('title').value = e.target.parentNode.parentNode.children[1].innerHTML
         document.getElementById('time').value  = e.target.parentNode.parentNode.children[3].innerHTML
         document.getElementById('price').value = e.target.parentNode.parentNode.children[2].innerHTML
@@ -94,7 +94,8 @@ btnupdate.addEventListener('click', (e) => {
         $.ajax({
             type: "POST",
             url: "/updateflight",
-            data: { 
+            data: {
+                'id' : id, 
                 'title': title,
                 'time':time,
                 'price':price,
