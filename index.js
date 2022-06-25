@@ -43,24 +43,43 @@ app.post("/bookflight", (req,res) => {
 });
 
 app.post("/updateflight", (req,res) => {
-  let id = Number(req.body.id)
-  console.log(req.body)
-  flights[id-1] = {
-    "id" : id,
-    "title": req.body.title,
-    "time": req.body.time,
-    "price": req.body.price,
-    "date": req.body.date
-}
-  console.log('----------------------------------------------------------')
-  console.log(flights)
+  let id = Number(req.body.id)  
+  flight = flights.find((item,index) => item.id == id)
+  if(flight!=undefined){
+    let flightindex = flights.indexOf(flight)
+    flight = {
+      "id" : id,
+      "title": req.body.title,
+      "time": req.body.time,
+      "price": req.body.price,
+      "date": req.body.date
+    }
+    flights[flightindex] = flight
+    let data = JSON.stringify(flights)
+    reader.writeFile('flight.json',data,(err) => {
+      if(err){
+        return res.json({success:0,msg:`can not Update a flight\n${err}`})
+      }
+    })
+    return res.json({success:1,flights:flights,msg:'your flight has been updated'})
+  }else{
+    return res.json({success:0,msg:`flight with ${id} does not exit`})
+  }
+
+});
+
+app.post("/deleteflight", (req,res) => {
+  let id = Number(req.body.id)  
+  flight = flights.find((item,index) => item.id == id)
+  let flightindex = flights.indexOf(flight)
+  flights.splice(flightindex,1) 
   let data = JSON.stringify(flights)
   reader.writeFile('flight.json',data,(err) => {
     if(err){
-      return res.json({success:0,msg:`can not Update a flight\n${err}`})
+      return res.json({success:0,msg:`can not Delete a flight\n${err}`})
     }
   })
-  return res.json({success:1,flights:flights,msg:'your flight has been updated'})
+  return res.json({success:1,flights:flights,msg:'flight has been Deleted'})
 });
 
 const port = process.env.PORT || 8000;
